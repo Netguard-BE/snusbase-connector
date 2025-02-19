@@ -1,0 +1,12 @@
+opencti:
+  url: 'http://localhost:8080'
+  token: 'ChangeMe'
+snusbase:
+  api_key: 'ChangeMe'
+connector:
+  id: 'ChangeMe' # Valid UUIDv4
+  type: "EXTERNAL_IMPORT"
+  name: "Snusbase - Data Breach Connector"
+  interval: 24  # run every 24 hours
+  scope: 'snusbase' # MIME type or SCO
+  log_level: 'info'
