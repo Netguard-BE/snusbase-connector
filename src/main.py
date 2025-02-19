@@ -390,6 +390,8 @@ class SnusbaseConnector:
 
     def timer(self) -> None:
         try:
+            # Run a first time
+            self.run()
             # Schedule the run method to run every x hours
             schedule.every(int(self.interval)).hours.do(self.run)
 

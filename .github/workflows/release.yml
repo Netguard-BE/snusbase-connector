@@ -1,0 +1,51 @@
+name: Build and Publish Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # This pattern matches semantic version tags like v1.0.0
+
+jobs:
+  build-and-release:
+    name: Build Docker Image and Publish Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to GitHub Container Registry (optional, in case you need it)
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 3: Build the Docker image
+      - name: Build Docker Image
+        run: |
+          docker build -t snusbase-connector:${{ github.ref_name }} .
+          docker save snusbase-connector:${{ github.ref_name }} -o snusbase-connector-${{ github.ref_name }}.tar
+
+      # Step 4: Upload the Docker image as a release asset
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            This release includes the Docker image for version ${{ github.ref_name }}.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Docker Image to Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./snusbase-connector-${{ github.ref_name }}.tar
+          asset_name: snusbase-connector-${{ github.ref_name }}.tar
+          asset_content_type: application/x-tar
