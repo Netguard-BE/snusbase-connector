@@ -2,14 +2,14 @@ services:
   snusbase-connector:
     image: ghcr.io/netguard-be/snusbase-connector:latest
     environment:
-      - OPENCTI_URL=http://opencti:8080
-      - OPENCTI_TOKEN=ChangeMe
-      - SNUSBASE_API_KEY=ChangeMe
-      - CONNECTOR_ID=ChangeMe # Valid UUIDv4
+      - OPENCTI_URL=${OPENCTI_URL}
+      - OPENCTI_TOKEN=${OPENCTI_TOKEN}
+      - CONNECTOR_ID=${CONNECTOR_ID} # Valid UUIDv4
       - "CONNECTOR_NAME=Snusbase - Data Breach Connector"
       - CONNECTOR_SCOPE=observable
       - CONNECTOR_LOG_LEVEL=error
       - CONNECTOR_INTERVAL=6
+      - SNUSBASE_API_KEY=${SNUSBASE_API_KEY}
     network_mode: "host"
     restart: always
     
