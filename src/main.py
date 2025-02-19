@@ -137,16 +137,14 @@ class SnusbaseConnector:
                 self.snusbase_url_dehash,
                 headers=headers,
                 data=payload,
-                timeout=10
             )
 
             response.raise_for_status()
             result = response.json()
-
             return result
         except requests.RequestException as e:
-            self.logger.exception("Exception occurred during dehash API call:")
-            return hashes
+            self.logger.exception(f"Exception occurred during dehash API call:{e}")
+            return []
 
     def retrieve_password_from_hash(self, data: Union[Dict, List, Any]) -> Union[Dict, List, Any]:
         """
@@ -228,6 +226,11 @@ class SnusbaseConnector:
             
             # Retrieve all hash (string) values from the incoming data.
             hashes = self.retrieve_password_from_hash(data)
+
+            if not hashes:
+                self.logger.info("No hashes found in the data.")
+                return data
+            
             # Get decoded hash details from Snusbase.
             decoded_hashes = self.dehash(hashes)
             

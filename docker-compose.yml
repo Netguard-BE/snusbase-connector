@@ -10,6 +10,5 @@ services:
       - CONNECTOR_SCOPE=observable
       - CONNECTOR_LOG_LEVEL=error
       - CONNECTOR_INTERVAL=6
-    network_mode: "host"
     restart: always
     
