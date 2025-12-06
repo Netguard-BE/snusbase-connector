@@ -10,3 +10,4 @@ connector:
   interval: 24  # run every 24 hours
   scope: 'snusbase' # MIME type or SCO
   log_level: 'info'
+  object_uuid_Label: 'UUID'

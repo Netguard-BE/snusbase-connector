@@ -12,6 +12,7 @@ services:
       - CONNECTOR_LOG_LEVEL=error
       - CONNECTOR_INTERVAL=6
       - SNUSBASE_API_KEY=${SNUSBASE_API_KEY}
+      - CONNECTOR_OBJECT_UUID_LABEL=081418ea-6bb9-4870-979f-54dd8dbae032
     network_mode: "host"
     restart: always
     

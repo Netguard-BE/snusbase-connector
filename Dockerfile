@@ -8,7 +8,7 @@ COPY src /opt/snusbase-connector
 RUN apk --no-cache add git build-base libmagic libffi-dev libxml2-dev libxslt-dev && \
     cd /opt/snusbase-connector && \
     pip install --upgrade pip && \
-    pip3 install --no-cache-dir pycti requests pyyaml stix2 python-magic schedule && \
+    pip3 install --no-cache-dir pycti==6.5 requests pyyaml stix2 python-magic schedule && \
     apk del git build-base
 
 # Expose and entrypoint

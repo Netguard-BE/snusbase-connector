@@ -36,6 +36,9 @@ class SnusbaseConnector:
         self.interval = get_config_variable(
             "CONNECTOR_INTERVAL", ["SnusbaseConnector", "connector_interval"], self.config
         )
+        self.objectUUIDLabel = get_config_variable(
+            "CONNECTOR_OBJECT_UUID_LABEL", ["SnusbaseConnector", "connector_object_uuid_Label"], self.config
+        )
 
         # self.load_config()
         self.initialize_opencti()
@@ -309,7 +312,7 @@ class SnusbaseConnector:
             "filters": [
                 {
                     "key": "objectLabel",
-                    "values": ["946062f4-2d60-44c7-8a45-67a34f1cd4a8"],
+                    "values": [self.objectUUIDLabel],
                     "operator": "eq",
                     "mode": "or"
                 }

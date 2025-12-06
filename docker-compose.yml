@@ -10,5 +10,6 @@ services:
       - CONNECTOR_SCOPE=observable
       - CONNECTOR_LOG_LEVEL=error
       - CONNECTOR_INTERVAL=6
+      - CONNECTOR_OBJECT_UUID_LABEL=081418ea-6bb9-4870-979f-54dd8dbae032
     restart: always
     
